@@ -2,7 +2,12 @@ import pytest
 
 
 def twoSum(nums: list[int], target: int) -> list[int]:
-    pass
+    num_to_index = dict()
+    for idx, num in enumerate(nums):
+        complement = target - num
+        if complement in num_to_index:
+            return [num_to_index[complement], idx]
+        num_to_index[num] = idx
 
 
 @pytest.mark.parametrize(
@@ -13,5 +18,5 @@ def twoSum(nums: list[int], target: int) -> list[int]:
         ([3, 3], 6, [0, 1]),
     ],
 )
-def test_twoSum():
-    assert False
+def test_twoSum(nums, target, expected):
+    assert twoSum(nums, target) == expected
