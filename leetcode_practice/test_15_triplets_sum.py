@@ -6,31 +6,48 @@ import pytest
 def threeSum(nums: list[int]) -> list[list[int]]:
     """
     [-1, 0, 1, 2, -1, -4]
+    sort [-4 -1, -1, 0, 1, 2]
 
 
     """
+    nums.sort()
 
-    triplets = set()
-    
-    # print(nums)
+    triplets = []
     for target_idx, target in enumerate(nums):
-        nums_seen = set()
-        for idx, num in enumerate(nums):
-            # skip target_idx
-            if idx == target_idx:
-                continue
 
-            # if we've seen (-target - num), then there
-            # exists target + num + (-target - num) = 0
-            if (-target - num) in nums_seen:
-                triplet = sorted([target, num, -target - num])
-                triplets.add(tuple(triplet))
+        # skip duplicates for the target
+        if target_idx > 0 and target == nums[target_idx - 1]:
+            continue
 
-            # print(triplets)
+        left, right = target_idx + 1, len(nums) - 1
+        while left < right:
 
-            nums_seen.add(num)
+            print(target, left, right, triplets)
 
-    return list(triplets)
+            left_num, right_num = nums[left], nums[right]
+            s = target + left_num + right_num
+
+            if s == 0:
+                triplets.append([target, left_num, right_num])
+
+                left = move_left(nums, left, right)
+                right = move_right(nums, left, right)
+
+            elif s < 0:
+                left = move_left(nums, left, right)
+            else:
+                right = move_right(nums, left, right)
+    return triplets
+
+def move_left(nums, left, right):
+    while left < right and nums[left + 1] == nums[left]:
+        left += 1
+    return left + 1
+
+def move_right(nums, left, right):
+    while left < right and nums[right - 1] == nums[right]:
+        right -= 1
+    return right - 1
 
 
 @pytest.mark.parametrize(
