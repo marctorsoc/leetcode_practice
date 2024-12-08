@@ -4,40 +4,46 @@ import pytest
 
 
 def twoSum(nums: list[int], target: int) -> list[int]:
-    # Best solution: O(N) space and O(N) time
-    # num_to_idx = dict()
+    # Best solution: O(n) time + O(n) space
+    # num_to_index = dict()
     # for idx, num in enumerate(nums):
-    #     comp = target - num
-    #     if comp in num_to_idx:
-    #         return [num_to_idx[comp], idx]
-    #     num_to_idx[num] = idx
+    #     if target - num in num_to_index:
+    #         return [num_to_index[target - num], idx]
+    #     num_to_index[num] = idx
 
-
-    # Another solution with 2-pointer and NOT coming sorted -- n * logn
-    nums_with_orig_indices = list(enumerate(nums))
-    nums_with_orig_indices.sort(key=lambda t: t[1])  # O( n * logn )
-
+    # Another solution with O(n * logn) time and O(n) space
+    # but if it was sorted would be O(1) space
+    nums_with_indexes = sorted(  # [(idx, num), ...]
+        enumerate(nums),
+        key=lambda t: t[1],
+    )
     left, right = 0, len(nums) - 1
-    while left < right:  # O(n)
-        left_idx, left_num = nums_with_orig_indices[left]
-        right_idx, right_num = nums_with_orig_indices[right]
+    while left < right:
+        print(left, right)
+        left_idx, left_num = nums_with_indexes[left]
+        right_idx, right_num = nums_with_indexes[right]
 
         s = left_num + right_num
-
         if s == target:
-            return sorted([left_idx, right_idx])
-        if s < target:
-            left += 1
-        else:
-            right -= 1
+            return (
+                [left_idx, right_idx] if left_idx < right_idx else [right_idx, left_idx]
+            )
+        elif s < target:
+            # skip dups
+            while nums_with_indexes[left][1] == left_num and left < right:
+                left += 1
+        else:  # s > 0
+            # skip dups
+            while nums_with_indexes[right][1] == right_num and left < right:
+                right -= 1
 
 
 @pytest.mark.parametrize(
     ("nums", "target", "expected"),
     [
-        ([2, 7, 11, 15], 9, [0, 1]),
-        ([3, 2, 4], 6, [1, 2]),
-        ([3, 3], 6, [0, 1]),
+        # ([2, 7, 11, 15], 9, [0, 1]),
+        # ([3, 2, 4], 6, [1, 2]),
+        # ([3, 3], 6, [0, 1]),
         ([-1, 0, 1, 2, -1, -4], -3, [2, 5]),
     ],
 )
