@@ -5,41 +5,46 @@ import pytest
 
 def exercise(nums: List[int], target: int) -> List[int]:
     """
-    [5,7,7,8,8,8,8,10] --> [3, 6]
+    1  2  3  4  6  6  6  7  7  8  8  8  9  9  9  9                            
 
-    nums = [5,7,7,7,7,7,8,8,8,8, 8, 8, 8, 8, 9]
-    idx  =  0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
-            l             c                  r  
-            l     c     r
-            l   c     r   
-            l   c     r   
+    right target = 6
+    1  2  3  4  6  6  6  7
+             4  6  6  6  7
+                   6  6  7
+                      6  7
+                      6
+
+    0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+    
+    while left < right:
+        get center middle point
+        if center = target and left: keep the left part
+        if center = target and right: keep the right part
+        if center > target: keep the left part
+        if center < target: keep the right part
 
     """
-    if not nums:
-        return [-1, -1]
 
-    left, right = 0, len(nums) - 1
-    while left <= right:
-        center = (left + right) // 2
-        # print(left, right, center)
-        # import pdb; pdb.set_trace()
-        if nums[center] == target:
-            break
-        elif nums[center] < target:
-            left = center + 1
-        else:
-            right = center - 1
-
-    # at this point we know that nums[center] = target
-    # but check if that's not the case
-    if nums[center] != target:
-        return [-1, -1]
-
-    left = right = center
-    while left > 0 and nums[left - 1] == target:
-        left -= 1
-    while right < len(nums) - 1 and nums[right + 1] == target:
-        right += 1
+    def modified_binary_search(array, target, is_left):
+        left, right = 0, len(array) - 1
+        idx = -1
+        while left <= right:
+            center = (left + right) // 2
+            if array[center] < target:  # keep right part
+                left = center + 1
+            elif array[center] > target:  # keep left part
+                right = center - 1
+            elif is_left:  # keep the left part
+                idx = center
+                right = center - 1
+            else:  # keep the right part
+                idx = center
+                left = center + 1
+        
+        return idx
+    
+    left = modified_binary_search(nums, target, is_left=True)
+    right = modified_binary_search(nums, target, is_left=False)
 
     return [left, right]
     

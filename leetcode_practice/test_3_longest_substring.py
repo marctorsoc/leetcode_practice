@@ -5,6 +5,26 @@ import pytest
 
 def lengthOfLongestSubstring(s: str) -> int:
     """
+    """
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
     a  b  c  a  b  c  b  b
        l        r             
     max=3
@@ -19,19 +39,19 @@ def lengthOfLongestSubstring(s: str) -> int:
 
     stop when right gets to the end
     """
-    c_to_idx = dict()
-    left, global_max = 0, 0
+    # c_to_idx = dict()
+    # left, global_max = 0, 0
 
-    for idx, c in enumerate(s):
-        if c not in c_to_idx or c_to_idx[c] < left:
-            global_max = max(global_max, idx - left + 1)
-            c_to_idx[c] = idx
-            continue
+    # for idx, c in enumerate(s):
+    #     if c not in c_to_idx or c_to_idx[c] < left:
+    #         global_max = max(global_max, idx - left + 1)
+    #         c_to_idx[c] = idx
+    #         continue
             
-        left = c_to_idx[c] + 1
-        c_to_idx[c] = idx
+    #     left = c_to_idx[c] + 1
+    #     c_to_idx[c] = idx
     
-    return global_max
+    # return global_max
 
 
 @pytest.mark.parametrize(
