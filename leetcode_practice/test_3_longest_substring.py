@@ -24,6 +24,13 @@ def lengthOfLongestSubstring(s: str) -> int:
 
 
 
+
+
+
+
+
+    #####################################
+
     """
     a  b  c  a  b  c  b  b
        l        r             

@@ -10,27 +10,49 @@ class ListNode:
 
 
 def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]):
-    preamble = ListNode() # we will return next of this
-    result = preamble
-    carry = 0
-
-    while l1 is not None or l2 is not None or carry:
-
-        # compute val and carry
-        a = l1.val if l1 else 0
-        b = l2.val if l2 else 0
-        val = a + b + carry
-        carry = int(val > 9)
-
-        # save to result
-        result.next = ListNode(val % 10)
-        result = result.next
-
-        l1 = l1.next if l1 else None
-        l2 = l2.next if l2 else None
+    pass
 
 
-    return preamble.next
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #############################
+
+
+
+
+
+    # preamble = ListNode() # we will return next of this
+    # result = preamble
+    # carry = 0
+
+    # while l1 is not None or l2 is not None or carry:
+
+    #     # compute val and carry
+    #     a = l1.val if l1 else 0
+    #     b = l2.val if l2 else 0
+    #     val = a + b + carry
+    #     carry = int(val > 9)
+
+    #     # save to result
+    #     result.next = ListNode(val % 10)
+    #     result = result.next
+
+    #     l1 = l1.next if l1 else None
+    #     l2 = l2.next if l2 else None
+
+
+    # return preamble.next
 
 
 # @pytest.mark.parametrize(

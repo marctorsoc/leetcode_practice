@@ -8,12 +8,32 @@ def groupAnagrams(strs: list[str]) -> list[list[str]]:
     """
     ["eat","tea","tan","ate","nat","bat"]
     """
-    key_to_anagrams = defaultdict(list)
-    for cur in strs:
-        key = sorted(cur)
-        key_to_anagrams[tuple(key)].append(cur)
+    pass
 
-    return [sorted(group) for group in key_to_anagrams.values()]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #######################################################
+
+
+
+    # key_to_anagrams = defaultdict(list)
+    # for cur in strs:
+    #     key = sorted(cur)
+    #     key_to_anagrams[tuple(key)].append(cur)
+
+    # return [sorted(group) for group in key_to_anagrams.values()]
 
 @pytest.mark.parametrize(
     ("input_data", "expected"),

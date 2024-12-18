@@ -5,12 +5,36 @@ import pytest
 
 
 def exercise(nums: List[int]) -> int:
-    current_max, global_max = nums[0], nums[0]
-    for num in nums[1:]:
-        current_max = max(num, num + current_max)
-        global_max = max(current_max, global_max)
+    pass
 
-    return global_max
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ############################################################
+
+
+    
+    # current_max, global_max = nums[0], nums[0]
+    # for num in nums[1:]:
+    #     current_max = max(num, num + current_max)
+    #     global_max = max(current_max, global_max)
+
+    # return global_max
 
 
 @pytest.mark.parametrize(
